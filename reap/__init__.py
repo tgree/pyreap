@@ -71,7 +71,7 @@ def sub_reap(args):
     PARENT_PID = int(args[1])
     signal.signal(signal.SIGALRM, sigalrm)
     signal.signal(signal.SIGTERM, sigterm)
-    CHILD_PROC = subprocess.Popen(args[2:])
+    CHILD_PROC = subprocess.Popen(args[2:], close_fds=False)
     signal.alarm(1)
 
     while True:
