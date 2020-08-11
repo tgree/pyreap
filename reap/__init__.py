@@ -37,7 +37,7 @@ def Popen(args, **kwargs):
     return subprocess.Popen(cmd, **kwargs)
 
 
-def sigalrm(signum, frame):
+def sigalrm(_signum, _frame):
     '''
     Check if our parent PID no longer matches and kill the child if that's the
     case.  If we end up killing the child, we'll later get a SIGCHLD and clean
@@ -49,7 +49,7 @@ def sigalrm(signum, frame):
         signal.alarm(1)
 
 
-def sigterm(signum, frame):
+def sigterm(_signum, _frame):
     '''
     We've received a terminate signal.  Kill the child and then wait for
     SIGCHLD to clean up.
@@ -71,12 +71,12 @@ def sub_reap(args):
     PARENT_PID = int(args[1])
     signal.signal(signal.SIGALRM, sigalrm)
     signal.signal(signal.SIGTERM, sigterm)
-    CHILD_PROC = subprocess.Popen(args[2:])
+    CHILD_PROC = subprocess.Popen(args[2:], close_fds=False)
     signal.alarm(1)
 
     while True:
         try:
-            pid, status = os.wait()
+            _, status = os.wait()
             break
         except OSError as e:
             if e.errno != errno.EINTR:
