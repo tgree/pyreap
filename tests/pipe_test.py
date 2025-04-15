@@ -1,4 +1,5 @@
 import argparse
+import sys
 import os
 
 import reap
@@ -13,7 +14,7 @@ def main_parent():
     f        = os.fdopen(rfd, 'r')
 
     # Spawn the child and pass the wfd number to the child.
-    cmd      = ['/usr/bin/env', 'python3', fp, '--wfd', '%u' % wfd]
+    cmd      = [sys.executable, fp, '--wfd', '%u' % wfd]
     proc     = reap.Popen(cmd, pass_fds=(wfd,))
 
     # Close the wfd in the parent here; if we don't close it then we won't get

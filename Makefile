@@ -1,5 +1,5 @@
 MODULE      := pyreap
-MODULE_VERS := 0.9.1
+MODULE_VERS := 0.9.2
 MODULE_DEPS := \
 		setup.cfg \
 		setup.py \
@@ -33,8 +33,8 @@ $(MODULE): dist/$(MODULE)-$(MODULE_VERS)-py3-none-any.whl
 
 .PHONY: install
 install: $(MODULE)
-	sudo pip3 uninstall -y $(MODULE)
-	sudo pip3 install dist/$(MODULE)-$(MODULE_VERS)-py3-none-any.whl
+	sudo pip3 uninstall -y $(MODULE) --break-system-packages
+	sudo pip3 install dist/$(MODULE)-$(MODULE_VERS)-py3-none-any.whl --break-system-packages
 
 .PHONY: uninstall
 uninstall:

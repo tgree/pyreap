@@ -33,7 +33,7 @@ def Popen(args, **kwargs):
     child as necessary.
     '''
     # Execute ourselves as a sub-process.
-    cmd = ['/usr/bin/env', 'python3', REAP_PATH, '%s' % os.getpid()] + args
+    cmd = [sys.executable, REAP_PATH, '%s' % os.getpid()] + args
     return subprocess.Popen(cmd, **kwargs)
 
 
