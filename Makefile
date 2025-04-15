@@ -1,5 +1,5 @@
 MODULE      := pyreap
-MODULE_VERS := 0.9.1
+MODULE_VERS := 0.9.2
 MODULE_DEPS := \
 		setup.cfg \
 		setup.py \
